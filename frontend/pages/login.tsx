@@ -2,9 +2,36 @@ import { TextInput, PasswordInput, Tooltip, Center, Text, Button } from '@mantin
 import { NextPage } from "next";
 import { BiInfoCircle } from "react-icons/bi";
 import { useInputState } from '@mantine/hooks';
+import { useMutation } from "react-query";
+import { post } from "../services/services";
+
+export type UserLoginRequest = {
+  email: string;
+  password: string;
+}
+
 
 const Login: NextPage = () => {
-  const [value, setValue] = useInputState('');
+  const [email, setEmail] = useInputState('');
+  const [password, setPassword] = useInputState('');
+  
+  const { mutate, isLoading } = useMutation(( data : UserLoginRequest) => post('user/signin', data), {
+    onSuccess: (res : any) => {
+      let message = "";
+      if(res.data.status == 401) message = "Email ou mot de passe incorrect.";
+      else message = "Connexion réussie."
+      alert(message)
+  },
+   onError: () => {
+        alert("Erreur lors de la tentative de connexion.")
+  },
+   onSettled: () => {
+     // queryClient.invalidateQueries('create')
+  }
+  });
+
+
+
 
       return (
         <div className="flex flex-col justify-center items-center space-y-4 mt-8">
@@ -16,20 +43,20 @@ const Login: NextPage = () => {
           <div>
             <div className='space-y-4'>
               <TextInput
-                classNames={{
-                }}
+                value={email}
+                onChange={setEmail}
                 label="Email"
                 placeholder="example@gmail.com"
               />
               <PasswordInput
-                value={value}
-                onChange={setValue}
+                value={password}
+                onChange={setPassword}
                 placeholder="Your password"
                 label="Mot de passe"
               />
             </div>
             <div className='inline-flex space-x-2 !mt-8'>
-              <Button className=''>
+              <Button className='' onClick={() => mutate({ email, password} as UserLoginRequest)}>
                 Se connecter
               </Button>
               <Button className=''>
