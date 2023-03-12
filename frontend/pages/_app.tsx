@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
         withGlobalStyles
         withNormalizeCSS
         theme={{
-          fontFamily: "Poppins, sans-serif",
+          fontFamily: "Hanken Grotesk, regular",
           colorScheme: 'dark',
         }}>
         <Component {...pageProps} />

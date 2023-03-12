@@ -4,6 +4,7 @@ import { BiInfoCircle } from "react-icons/bi";
 import { useInputState } from '@mantine/hooks';
 import { useMutation } from "react-query";
 import { post } from "../services/services";
+import Link from 'next/link';
 
 export type UserLoginRequest = {
   email: string;
@@ -52,16 +53,18 @@ const Login: NextPage = () => {
                 value={password}
                 onChange={setPassword}
                 placeholder="Your password"
-                label="Mot de passe"
+                label="Password"
               />
             </div>
             <div className='inline-flex space-x-2 !mt-8'>
-              <Button className='' onClick={() => mutate({ email, password} as UserLoginRequest)}>
-                Se connecter
+              <Button variant="gradient" onClick={() => mutate({ email, password} as UserLoginRequest)}>
+                Sign in
               </Button>
-              <Button className=''>
-                Inscription
-              </Button>
+              <Link href="/signup">
+                <Button variant="gradient">
+                  Sign up
+                </Button>
+              </Link>
             </div>
           </div>
         </div>   
