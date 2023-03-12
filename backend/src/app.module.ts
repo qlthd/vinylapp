@@ -9,13 +9,10 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { UserController } from "./controller/user.controller";
 import { UserService } from "./service/user.service";
 import { User, UserSchema } from "./model/user.schema";
-import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/:${process.env.DB_DATABASE}`
-    ),
+    MongooseModule.forRoot(`mongodb://127.0.0.1:27017/local`),
     JwtModule.register({
       secret,
       signOptions: { expiresIn: "2h" },

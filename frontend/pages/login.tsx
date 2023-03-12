@@ -5,33 +5,39 @@ import { useInputState } from '@mantine/hooks';
 import { useMutation } from "react-query";
 import { post } from "../services/services";
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import {UserLoginRequest} from '../pages/api/auth/[...nextauth]';
+import { FormEventHandler, useState } from "react";
 
-export type UserLoginRequest = {
-  email: string;
-  password: string;
-}
 
 
 const Login: NextPage = () => {
   const [email, setEmail] = useInputState('');
   const [password, setPassword] = useInputState('');
   
-  const { mutate, isLoading } = useMutation(( data : UserLoginRequest) => post('user/signin', data), {
-    onSuccess: (res : any) => {
-      let message = "";
-      if(res.data.status == 401) message = "Email ou mot de passe incorrect.";
-      else message = "Connexion réussie."
-      alert(message)
-  },
-   onError: () => {
-        alert("Erreur lors de la tentative de connexion.")
-  },
-   onSettled: () => {
-     // queryClient.invalidateQueries('create')
+  // const { mutate, isLoading } = useMutation(( data : UserLoginRequest) => post('user/signin', data), {
+  //   onSuccess: (res : any) => {
+  //     let message = "";
+  //     if(res.data.status == 401) message = "Email ou mot de passe incorrect.";
+  //     else message = "Connexion réussie."
+  //     alert(message)
+  // },
+  //  onError: () => {
+  //       alert("Erreur lors de la tentative de connexion.")
+  // },
+  //  onSettled: () => {
+  //    // queryClient.invalidateQueries('create')
+  // }
+  // });
+  
+  const handleLogin = async (e) => {    
+    e.preventDefault();
+    const res = await signIn("credentials", {
+      email: email,
+      password: password,
+      callbackUrl: 'http://localhost:3001/welcome',
+    });
   }
-  });
-
-
 
 
       return (
@@ -57,7 +63,7 @@ const Login: NextPage = () => {
               />
             </div>
             <div className='inline-flex space-x-2 !mt-8'>
-              <Button variant="gradient" onClick={() => mutate({ email, password} as UserLoginRequest)}>
+              <Button variant="gradient" onClick={handleLogin}>
                 Sign in
               </Button>
               <Link href="/signup">
