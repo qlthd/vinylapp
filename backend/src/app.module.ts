@@ -6,9 +6,10 @@ import { JwtModule } from "@nestjs/jwt";
 import { secret } from "./utils/constants";
 import { join } from "path/posix";
 import { ServeStaticModule } from "@nestjs/serve-static";
-import { UserController } from "./controller/user.controller";
-import { UserService } from "./service/user.service";
-import { User, UserSchema } from "./model/user.schema";
+import { UserController } from "./user/user.controller";
+import { UserService } from "./user/user.service";
+import { User, UserSchema } from "./user/user.model";
+import { ArtistModule } from './artist/artist.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { User, UserSchema } from "./model/user.schema";
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "public"),
     }),
+    ArtistModule
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],

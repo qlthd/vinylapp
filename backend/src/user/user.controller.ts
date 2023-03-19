@@ -11,8 +11,8 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { User } from '../model/user.schema';
-import { UserService } from '../service/user.service';
+import { User } from './user.model';
+import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 
 @Controller('user')
