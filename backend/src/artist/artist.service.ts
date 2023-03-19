@@ -15,7 +15,7 @@ export class ArtistService {
       }
     
       findAll() {
-        return `This action returns all artist`;
+        return this.artistModel.find();
       }
     
       findOne(id: number) {

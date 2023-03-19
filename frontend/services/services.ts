@@ -6,3 +6,10 @@ export async function post<T>(url: string, data: any): Promise<T> {
     });
     return instance.post(url, data);
 }
+
+export async function get<T>(url: string): Promise<T> {
+    const instance = axios.create({
+        baseURL: 'http://localhost:3002/'
+    });
+    return instance.get(url);
+}
