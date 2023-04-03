@@ -1,11 +1,19 @@
-import { Card } from '@mantine/core';
+import { Button, Card } from '@mantine/core';
 import { Avatar } from '@mantine/core';
+import Link from 'next/link';
 
 export default function Artists(props){
 
       return (
         <div className='m-2'>
             <h1>Artists</h1>
+            <Link href="/artists/new">
+                <Button
+                    leftIcon="+"
+                    variant="outline"
+                >Ajouter un artiste</Button>
+            </Link>
+           
             <div className='grid grid-cols-3'>
                 {props.data.map(p =>
                     <Card className='m-2'>
