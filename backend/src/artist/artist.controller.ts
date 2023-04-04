@@ -9,8 +9,8 @@ export class ArtistController {
     ){}
 
   @Post()
-  create(@Body() createArtist2Dto: Artist) {
-    return this.artistService.create(createArtist2Dto);
+  create(@Body() createArtistDto: Artist) {
+    return this.artistService.create(createArtistDto);
   }
 
   @Get()
@@ -30,7 +30,7 @@ export class ArtistController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.artistService.remove(+id);
+    return this.artistService.remove(id);
   }
 
     

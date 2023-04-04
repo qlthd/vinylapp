@@ -11,7 +11,7 @@ export class ArtistService {
     }
 
     create(createArtist: Artist) {
-        return 'This action adds a new artist';
+        return this.artistModel.create(createArtist);
       }
     
       findAll() {
@@ -26,7 +26,7 @@ export class ArtistService {
         return `This action updates a #${id} artist`;
       }
     
-      remove(id: number) {
-        return `This action removes a #${id} artist`;
+      remove(id: string) {
+        return this.artistModel.remove({_id: id});
       }
 }

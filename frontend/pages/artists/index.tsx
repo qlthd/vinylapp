@@ -1,8 +1,37 @@
+import { get, post, remove } from '@/services/services';
 import { Button, Card } from '@mantine/core';
 import { Avatar } from '@mantine/core';
 import Link from 'next/link';
-
+import { useState } from 'react';
+import { MdDelete } from "react-icons/md"
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 export default function Artists(props){
+    const queryClient = useQueryClient();
+    const [data, setData] = useState<any>([]);
+
+    const { mutate, isLoading } = useMutation(( id : number) => remove(`artist/${id}`), {
+        onSuccess: (res : any) => {
+            queryClient.invalidateQueries('artists');
+            toast("Artist removed successfully !", { type: 'success'});
+        },
+        onError: () => {
+        },
+        onSettled: () => {
+            
+        }
+    });
+
+    useQuery(
+        ['artists',{}],
+        () => get(`artist`).then(data => data),
+        {
+            onSuccess: (res : any) => {
+                console.log(res.data);
+                const data = res.data;
+                setData(data);
+            }
+        });
 
       return (
         <div className='m-2'>
@@ -15,7 +44,7 @@ export default function Artists(props){
             </Link>
            
             <div className='grid grid-cols-3'>
-                {props.data.map(p =>
+                {data && data.map(p =>
                     <Card className='m-2'>
                         <Avatar 
                             size="xl"
@@ -26,6 +55,9 @@ export default function Artists(props){
                         <h4 className="text-white">
                             {p.name}
                         </h4>
+                        <Button onClick={()=> mutate(p._id)}>
+                            <MdDelete />
+                        </Button>
                     </Card>
                 )}
             </div>
@@ -33,11 +65,6 @@ export default function Artists(props){
       );
   };
   
-export async function getServerSideProps() {
-    const res = await fetch(`${process.env.API_URL}/artist`);
-    const data = await res.json();
 
-    return { props: { data : data } }
-}
 
 
