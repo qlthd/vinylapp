@@ -22,7 +22,6 @@ export default function New(props){
   const { mutate, isLoading } = useMutation(( data : Artist) => post('artist', data), {
     onSuccess: (res : any) => {
       toast("Artist added !", { type: 'success'});
-
     },
     onError: () => {
     },
