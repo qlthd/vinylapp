@@ -14,19 +14,19 @@ export class ArtistService {
         return this.artistModel.create(createArtist);
       }
     
-      findAll() {
-        return this.artistModel.find();
-      }
+    findAll() {
+      return this.artistModel.find();
+    }
     
-      findOne(id: number) {
-        return this.artistModel.findById(id);
-      }
-    
-      update(id: number, updateArtist: Artist) {
-        this.artistModel.updateOne(a => a.id == id, updateArtist);
-      }
-    
-      remove(id: string) {
-        return this.artistModel.remove({_id: id});
-      }
+    findByName(name: string) {
+      return this.artistModel.findOne({name: name});
+    }
+  
+    update(id: number, updateArtist: Artist) {
+      this.artistModel.updateOne(a => a.id == id, updateArtist);
+    }
+  
+    remove(id: string) {
+      return this.artistModel.remove({_id: id});
+    }
 }

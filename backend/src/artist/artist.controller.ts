@@ -18,9 +18,10 @@ export class ArtistController {
     return this.artistService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.artistService.findOne(+id);
+  @Get(':name')
+  findByName(@Param('name') name: string) {
+    const art= this.artistService.findByName(name);
+    return art;
   }
 
   @Patch(':id')
