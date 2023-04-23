@@ -23,7 +23,7 @@ export class ArtistService {
       }
     
       update(id: number, updateArtist: Artist) {
-        return `This action updates a #${id} artist`;
+        this.artistModel.updateOne(a => a.id == id, updateArtist);
       }
     
       remove(id: string) {
