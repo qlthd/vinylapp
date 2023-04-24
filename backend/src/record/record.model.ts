@@ -16,7 +16,7 @@ export class Record {
     @Prop({default: Date.now() })
     createdDate: Date;
 
-    @Prop({required:true})
+    @Prop({ type: [{ type: 'ObjectId', ref: 'Genre' }] })
     genres: Genre[];
 }
 export const RecordSchema = SchemaFactory.createForClass(Record)

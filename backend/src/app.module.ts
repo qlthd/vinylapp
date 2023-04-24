@@ -13,6 +13,9 @@ import { ArtistModule } from './artist/artist.module';
 import { ArtistService } from "./artist/artist.service";
 import { ArtistController } from "./artist/artist.controller";
 import { Artist, ArtistSchema } from "./artist/artist.model";
+import { RecordService } from "./record/record.service";
+import { RecordController } from "./record/record.controller";
+import { Record, RecordSchema } from "./record/record.model";
 
 @Module({
   imports: [
@@ -21,12 +24,12 @@ import { Artist, ArtistSchema } from "./artist/artist.model";
       secret,
       signOptions: { expiresIn: "2h" },
     }),
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }, { name: Artist.name, schema: ArtistSchema } ]),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }, { name: Artist.name, schema: ArtistSchema }, { name: Record.name, schema: RecordSchema } ]),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "public"),
     })
   ],
-  controllers: [AppController, UserController, ArtistController],
-  providers: [AppService, UserService, ArtistService],
+  controllers: [AppController, UserController, ArtistController, RecordController],
+  providers: [AppService, UserService, ArtistService, RecordService],
 })
 export class AppModule {}

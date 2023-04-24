@@ -19,8 +19,8 @@ export class RecordService {
         return this.recordModel.find();
       }
     
-      findOne(id: number) {
-        return this.recordModel.findById(id);
+      findByName(name: string) {
+        return this.recordModel.findOne({name: name});
       }
     
       update(id: number, updateRecord: Record) {
