@@ -22,8 +22,8 @@ export class ArtistService {
       return this.artistModel.findOne({name: name});
     }
   
-    update(id: number, updateArtist: Artist) {
-      this.artistModel.updateOne(a => a.id == id, updateArtist);
+    update(id: string, updateArtist: Artist) {
+      this.artistModel.findOneAndUpdate(a => a.id == id, updateArtist);
     }
   
     remove(id: string) {

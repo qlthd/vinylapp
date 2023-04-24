@@ -26,7 +26,7 @@ export class ArtistController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateArtist: Artist) {
-    return this.artistService.update(+id, updateArtist);
+    return this.artistService.update(id, updateArtist);
   }
 
   @Delete(':id')
