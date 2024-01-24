@@ -26,7 +26,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^10.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "mongodb-memory-server": "^8.12.2",
+    "mongodb-memory-server": "^9.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
