@@ -12,8 +12,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/server": "^11.10.0",
-    "@mantine/core": "^6.0.1",
-    "@mantine/hooks": "^6.0.1",
+    "@mantine/core": "^7.0.0",
+    "@mantine/hooks": "^7.0.0",
     "@mantine/next": "^6.0.1",
     "@types/node": "20.11.10",
     "@types/react": "18.2.48",
